@@ -1,5 +1,6 @@
 package com.cyosp.smserver;
 
+import java.io.File;
 import java.io.IOException;
 
 import android.app.Notification;
@@ -7,6 +8,8 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.os.Environment;
 import android.os.IBinder;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
@@ -17,7 +20,7 @@ import com.cyosp.smserver.helpers.LogHelper;
 /**
  * App foreground service
  *
- * @author cyosp
+ * @author CYOSP
  *
  */
 public class AppService extends Service
@@ -26,7 +29,16 @@ public class AppService extends Service
 	@Override
 	public void onCreate()
 	{
-		LogHelper.getInstance().info( "Service started" );
+		//
+		// Manage logger: Activity startup VS Service at Android boot
+		//
+		LogHelper logger = LogHelper.getInstance();
+		if( logger == null )
+		{
+			logger = LogHelper.createInstance( Environment.getExternalStorageDirectory() + File.separator + getString(R.string.app_name) + ".log" );
+			logger.getLogFilePath().delete();
+		}
+		logger.info( "Service started" );
 		
 		try
 		{
@@ -54,7 +66,20 @@ public class AppService extends Service
 		
 		PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, i, 0);
 		
-		notification.setLatestEventInfo(this, getString( R.string.app_name ) , "Started", pendingIntent);
+		//
+		// Compute version label
+		//
+		String versionlabel = "";
+		try
+		{
+			versionlabel = "v" + getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
+		}
+		catch( NameNotFoundException e )
+		{
+			// Version won't be displayed
+		}
+		
+		notification.setLatestEventInfo( this , getString( R.string.app_name ) , "Started " + versionlabel , pendingIntent );
 		notification.flags |= Notification.FLAG_NO_CLEAR;
 		
 		// Transform background service as a foreground service

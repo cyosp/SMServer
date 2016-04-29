@@ -2,17 +2,21 @@
 
 An Android App to send SMS using HTTP requests
 
-![Stable version](https://img.shields.io/badge/stable-1.0.0-blue.svg)
+![Stable version](https://img.shields.io/badge/stable-1.1.0-blue.svg)
 [![BSD-3 license](https://img.shields.io/badge/license-BSD--3--Clause-428F7E.svg)](https://tldrlegal.com/license/bsd-3-clause-license-%28revised%29)
 </br>
 ![Android minimum version](https://img.shields.io/badge/android--min--version-2.2.x-yellow.svg)
 ![Android tested version](https://img.shields.io/badge/android--tested--version-4.2.2-green.svg)
+
+![SMServer](/doc/images/SMServer.png?raw=true "SMServer")
 
 ## Features
 
 This App is an empty Android activity which launches a foreground service with two HTTP features:
  * Send SMS
  * Display logs
+
+Service is automatically run when Android boot phase is completed.
 
 ### SMS
 

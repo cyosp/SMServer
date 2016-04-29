@@ -14,7 +14,7 @@ import com.cyosp.smserver.helpers.LogHelper;
 /**
  * This class is in charge to manage SMS send status
  * 
- * @author cyosp
+ * @author CYOSP
  *
  */
 public class SMSBroadcastReceiver extends BroadcastReceiver

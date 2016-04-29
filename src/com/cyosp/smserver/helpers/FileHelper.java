@@ -10,7 +10,7 @@ import java.io.IOException;
  * 
  * This class is an Helper of File class
  * 
- * @author cyosp
+ * @author CYOSP
  *
  */
 public class FileHelper

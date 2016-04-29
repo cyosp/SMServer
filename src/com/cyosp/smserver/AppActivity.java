@@ -14,7 +14,7 @@ import com.cyosp.smserver.helpers.LogHelper;
 /**
  * App activity
  *
- * @author cyosp
+ * @author CYOSP
  *
  */
 public class AppActivity extends Activity
@@ -30,9 +30,15 @@ public class AppActivity extends Activity
 		
 		checkSMSsentIntent = getString(R.string.app_name) + "_CHECK_SMS_SENT";
 		
-		LogHelper logger = LogHelper.createInstance( Environment.getExternalStorageDirectory() + File.separator + getString(R.string.app_name) + ".log" );
-		logger.getLogFilePath().delete();		
-		
+		//
+		// Manage logger: Activity startup VS Service at Android boot
+		//
+		LogHelper logger = LogHelper.getInstance();
+		if( logger == null )
+		{
+			logger = LogHelper.createInstance( Environment.getExternalStorageDirectory() + File.separator + getString(R.string.app_name) + ".log" );
+			logger.getLogFilePath().delete();
+		}
 		logger.info( "Activity started" );
 			
 		// Register broadcast receiver

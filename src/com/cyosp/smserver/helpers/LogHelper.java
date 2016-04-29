@@ -12,7 +12,7 @@ import java.util.Locale;
  * 
  * This class is an Helper to manage logs
  * 
- * @author cyosp
+ * @author CYOSP
  *
  */
 public class LogHelper

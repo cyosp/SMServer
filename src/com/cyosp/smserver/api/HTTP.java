@@ -12,7 +12,7 @@ import fi.iki.elonen.NanoHTTPD;
  * 
  * This class is in charge of the HTTP API
  * 
- * @author cyops
+ * @author CYOSP
  *
  */
 public class HTTP extends NanoHTTPD

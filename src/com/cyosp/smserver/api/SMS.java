@@ -14,7 +14,7 @@ import android.telephony.SmsManager;
  * 
  * This class is in charge of the SMS API
  * 
- * @author cyosp
+ * @author CYOSP
  *
  */
 public class SMS
