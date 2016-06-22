@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.cyosp.smserver.helpers.FileHelper;
 import com.cyosp.smserver.helpers.LogHelper;
+import com.cyosp.smserver.helpers.StackTraceHelper;
 
 import fi.iki.elonen.NanoHTTPD;
 
@@ -72,7 +73,15 @@ public class HTTP extends NanoHTTPD
 			}
 			catch( Exception e )
 			{
-				msg += "<h1><p>ERROR: " + e.getMessage() + "</p></h1>";
+				// Get stack trace as a string
+				String stacktrace = StackTraceHelper.getStackTrace( e );
+				// Format stack trace to be HTML compliant
+				stacktrace = stacktrace.replaceAll( "\n" , "<br/>" );
+				stacktrace = stacktrace.replaceAll( "\t" , "&nbsp;&nbsp;&nbsp;" );
+				
+				// Define HTML error message
+				msg += "<h1><p>ERROR: </p></h1>";
+				msg += "<h2><p>" + stacktrace + "</p></h2>";
 			}
 			
 			msg += "</body>";

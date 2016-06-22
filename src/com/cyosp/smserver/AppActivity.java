@@ -4,11 +4,9 @@ import java.io.File;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Environment;
 
-import com.cyosp.smserver.broadcastreceiver.SMSBroadcastReceiver;
 import com.cyosp.smserver.helpers.LogHelper;
 
 /**
@@ -18,17 +16,13 @@ import com.cyosp.smserver.helpers.LogHelper;
  *
  */
 public class AppActivity extends Activity
-{
-	public static String checkSMSsentIntent = null;
-	
+{	
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate( Bundle savedInstanceState )
 	{
 		super.onCreate( savedInstanceState );
 		setContentView(R.layout.main);
-		
-		checkSMSsentIntent = getString(R.string.app_name) + "_CHECK_SMS_SENT";
 		
 		//
 		// Manage logger: Activity startup VS Service at Android boot
@@ -41,10 +35,6 @@ public class AppActivity extends Activity
 		}
 		logger.info( "Activity started" );
 			
-		// Register broadcast receiver
-		// Receiver will receive only "onReceive" intent register with the IntentFilter 
-		registerReceiver(SMSBroadcastReceiver.createInstance( this ), new IntentFilter( checkSMSsentIntent ) );
-		
 		// Start service
 		startService( new Intent( this , AppService.class ) );
 	}

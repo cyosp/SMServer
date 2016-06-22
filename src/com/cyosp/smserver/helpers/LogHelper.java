@@ -61,7 +61,7 @@ public class LogHelper
 	//
 	
 	/**
-	 * This Method must be first and only once
+	 * This Method must be called first and only once
 	 * It allows to get a Log Helper instance
 	 * @param logFilePath Log file path
 	 * @return A LogHelper instance

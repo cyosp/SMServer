@@ -8,6 +8,7 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Environment;
 import android.os.IBinder;
@@ -15,6 +16,7 @@ import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 
 import com.cyosp.smserver.api.HTTP;
+import com.cyosp.smserver.broadcastreceiver.SMSBroadcastReceiver;
 import com.cyosp.smserver.helpers.LogHelper;
 
 /**
@@ -25,6 +27,8 @@ import com.cyosp.smserver.helpers.LogHelper;
  */
 public class AppService extends Service
 {
+	public static String checkSMSsentIntent = null;
+	
 	/** Called when the service is first created. */
 	@Override
 	public void onCreate()
@@ -39,6 +43,13 @@ public class AppService extends Service
 			logger.getLogFilePath().delete();
 		}
 		logger.info( "Service started" );
+		
+		// Create intent string
+		checkSMSsentIntent = getString(R.string.app_name) + "_CHECK_SMS_SENT";
+		
+		// Register broadcast receiver
+		// Receiver will receive only "onReceive" intent register with the IntentFilter 
+		registerReceiver(SMSBroadcastReceiver.createInstance( this ), new IntentFilter( checkSMSsentIntent ) );
 		
 		try
 		{

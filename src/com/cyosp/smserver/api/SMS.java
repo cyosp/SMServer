@@ -2,13 +2,13 @@ package com.cyosp.smserver.api;
 
 import java.util.ArrayList;
 
-import com.cyosp.smserver.AppActivity;
-import com.cyosp.smserver.broadcastreceiver.SMSBroadcastReceiver;
-import com.cyosp.smserver.helpers.LogHelper;
-
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.telephony.SmsManager;
+
+import com.cyosp.smserver.AppService;
+import com.cyosp.smserver.broadcastreceiver.SMSBroadcastReceiver;
+import com.cyosp.smserver.helpers.LogHelper;
 
 /**
  * 
@@ -61,7 +61,7 @@ public class SMS
 		// Add a send intent per SMS part
 		for( int i = 0; i < smsMultipart.size(); i++ )
 		{
-			Intent intent = new Intent( AppActivity.checkSMSsentIntent );
+			Intent intent = new Intent( AppService.checkSMSsentIntent );
 			intent.putExtra( "id" , getPhoneNumber() + "#" + countAsId );
 			intent.putExtra( "smsPartNbr" , smsMultipart.size() );
 			
